@@ -1,0 +1,77 @@
+# Build outputs
+bin/
+obj/
+out/
+publish/
+artifacts/
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+*.DotSettings.user
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# VS Code
+.vscode/*
+!.vscode/extensions.json
+
+# NuGet & packages
+packages/
+*.nupkg
+project.lock.json
+project.assets.json
+.nuget/
+
+# Logs, reports, test results, coverage
+*.log
+logs/
+TestResults/
+*.coverage
+coverage/
+coverage/**
+
+# Database files
+*.mdf
+*.ldf
+*.sqlite
+*.db
+
+# User secrets / local settings
+appsettings.Development.json
+secrets.json
+*.Local.settings.json
+
+# Temporary / backup files
+*.tmp
+*.temp
+*.bak
+*~
+*.swp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node (if present)
+node_modules/
+npm-debug.log
+
+# Generated files
+Generated/
+*.g.cs
+
+# Tools
+.toolstargets
+.dotnet_tools/
+
+# Ignore Rider caches and workspace files
+.idea/
+.idea/**
+
+# End of file
