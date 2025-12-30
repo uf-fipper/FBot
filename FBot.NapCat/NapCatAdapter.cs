@@ -1,3 +1,4 @@
+using System.Net.WebSockets;
 using FBot.OneBotV11;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -22,8 +23,13 @@ public class NapCatAdapter : OneBotV11Adapter
     public NapCatAdapter(FDriver driver, IOptions<OneBotV11Config> oneBotV11Config)
         : base(driver, oneBotV11Config) { }
 
-    protected override IOneBotV11Bot CreateBot(long id, HttpServerConfig serverConfig)
+    protected override INapCatBot CreateBot(long id, HttpServerConfig serverConfig)
     {
-        return base.CreateBot(id, serverConfig);
+        return new NapCatHttpBot(this, id, serverConfig);
+    }
+
+    protected override INapCatBot CreateBot(long id, WebSocket webSocket)
+    {
+        return new NapCatWebSocketBot(this, id, webSocket);
     }
 }
