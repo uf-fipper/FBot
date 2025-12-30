@@ -1,15 +1,15 @@
 using System.Text.Json.Serialization;
 
-namespace FBot.OneBotV11.Apis.Vo;
+namespace FBot.OneBotV11.Apis.Dto;
 
 /// <summary>
-/// 发送消息响应数据
+/// 撤回消息请求参数
 /// </summary>
-public record SendMsgVo
+public record DeleteMsgDto
 {
     /// <summary>
     /// 消息 ID
     /// </summary>
     [JsonPropertyName("message_id")]
-    public long MessageId { get; init; }
+    public required int MessageId { get; init; }
 }

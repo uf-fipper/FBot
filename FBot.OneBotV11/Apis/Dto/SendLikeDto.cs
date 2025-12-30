@@ -1,12 +1,11 @@
 using System.Text.Json.Serialization;
-using FBot.OneBotV11.Events.Messages.Segments;
 
 namespace FBot.OneBotV11.Apis.Dto;
 
 /// <summary>
-/// 发送私聊消息请求参数
+/// 发送好友赞请求参数
 /// </summary>
-public record SendPrivateMsgDto
+public record SendLikeDto
 {
     /// <summary>
     /// 对方 QQ 号
@@ -15,8 +14,8 @@ public record SendPrivateMsgDto
     public required long UserId { get; init; }
 
     /// <summary>
-    /// 要发送的内容
+    /// 赞的次数，每个好友每天最多 10 次
     /// </summary>
-    [JsonPropertyName("message")]
-    public required Message Message { get; init; }
+    [JsonPropertyName("times")]
+    public int Times { get; init; } = 1;
 }

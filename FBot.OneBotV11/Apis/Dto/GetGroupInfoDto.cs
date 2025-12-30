@@ -1,12 +1,11 @@
 using System.Text.Json.Serialization;
-using FBot.OneBotV11.Events.Messages.Segments;
 
 namespace FBot.OneBotV11.Apis.Dto;
 
 /// <summary>
-/// 发送群消息请求参数
+/// 获取群信息请求参数
 /// </summary>
-public record SendGroupMsgDto
+public record GetGroupInfoDto
 {
     /// <summary>
     /// 群号
@@ -15,8 +14,8 @@ public record SendGroupMsgDto
     public required long GroupId { get; init; }
 
     /// <summary>
-    /// 要发送的内容
+    /// 是否不使用缓存（使用缓存可能更新不及时，但响应更快），默认 false
     /// </summary>
-    [JsonPropertyName("message")]
-    public required Message Message { get; init; }
+    [JsonPropertyName("no_cache")]
+    public bool NoCache { get; init; } = false;
 }

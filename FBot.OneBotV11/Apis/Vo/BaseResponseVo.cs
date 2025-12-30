@@ -2,30 +2,45 @@ using System.Text.Json.Serialization;
 
 namespace FBot.OneBotV11.Apis.Vo;
 
-public class BaseResponseVo
+/// <summary>
+/// API 响应基础数据
+/// </summary>
+public record BaseResponseVo
 {
     /// <summary>
     /// 状态
     /// </summary>
     [JsonPropertyName("status")]
-    public BaseResponseVoStatus Status { get; set; }
+    public BaseResponseVoStatus Status { get; init; }
 
+    /// <summary>
+    /// 返回码
+    /// </summary>
     [JsonPropertyName("retcode")]
-    public int Retcode { get; set; }
+    public int Retcode { get; init; }
 
     /// <summary>
     /// 如果是 WebSocket 请求，则会带上 Echo
     /// </summary>
     [JsonPropertyName("echo")]
-    public Guid Echo { get; set; }
+    public Guid Echo { get; init; }
 }
 
-public class BaseResponseVo<T> : BaseResponseVo
+/// <summary>
+/// 泛型 API 响应数据
+/// </summary>
+public record BaseResponseVo<T> : BaseResponseVo
 {
+    /// <summary>
+    /// 响应数据
+    /// </summary>
     [JsonPropertyName("data")]
-    public T Data { get; set; } = default!;
+    public T Data { get; init; } = default!;
 }
 
+/// <summary>
+/// API 响应状态枚举
+/// </summary>
 [JsonConverter(typeof(JsonStringEnumConverter))]
 public enum BaseResponseVoStatus
 {

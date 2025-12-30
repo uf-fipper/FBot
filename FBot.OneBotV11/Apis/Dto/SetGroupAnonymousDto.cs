@@ -1,12 +1,11 @@
 using System.Text.Json.Serialization;
-using FBot.OneBotV11.Events.Messages.Segments;
 
 namespace FBot.OneBotV11.Apis.Dto;
 
 /// <summary>
-/// 发送群消息请求参数
+/// 群组匿名请求参数
 /// </summary>
-public record SendGroupMsgDto
+public record SetGroupAnonymousDto
 {
     /// <summary>
     /// 群号
@@ -15,8 +14,8 @@ public record SendGroupMsgDto
     public required long GroupId { get; init; }
 
     /// <summary>
-    /// 要发送的内容
+    /// 是否允许匿名聊天，默认 true
     /// </summary>
-    [JsonPropertyName("message")]
-    public required Message Message { get; init; }
+    [JsonPropertyName("enable")]
+    public bool Enable { get; init; } = true;
 }

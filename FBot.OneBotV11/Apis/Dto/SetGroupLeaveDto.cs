@@ -1,12 +1,11 @@
 using System.Text.Json.Serialization;
-using FBot.OneBotV11.Events.Messages.Segments;
 
 namespace FBot.OneBotV11.Apis.Dto;
 
 /// <summary>
-/// 发送群消息请求参数
+/// 退出群组请求参数
 /// </summary>
-public record SendGroupMsgDto
+public record SetGroupLeaveDto
 {
     /// <summary>
     /// 群号
@@ -15,8 +14,8 @@ public record SendGroupMsgDto
     public required long GroupId { get; init; }
 
     /// <summary>
-    /// 要发送的内容
+    /// 是否解散，如果登录号是群主，则仅在此项为 true 时能够解散，默认 false
     /// </summary>
-    [JsonPropertyName("message")]
-    public required Message Message { get; init; }
+    [JsonPropertyName("is_dismiss")]
+    public bool IsDismiss { get; init; } = false;
 }
