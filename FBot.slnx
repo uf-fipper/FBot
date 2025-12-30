@@ -1,6 +1,8 @@
 <Solution>
   <Project Path="FBot.Invoker.Tests/FBot.Invoker.Tests.csproj" />
   <Project Path="FBot.Invoker/FBot.Invoker.csproj" />
+  <Project Path="FBot.NapCat/FBot.NapCat.csproj" />
+  <Project Path="FBot.OneBotV11/FBot.OneBotV11.csproj" />
   <Project Path="FBot.Tests/FBot.Tests.csproj" />
   <Project Path="FBot/FBot.csproj" />
 </Solution>
