@@ -11,5 +11,5 @@ public record GetCookiesVo
     /// Cookies
     /// </summary>
     [JsonPropertyName("cookies")]
-    public string Cookies { get; init; } = string.Empty;
+    public string Cookies { get; set; } = string.Empty;
 }

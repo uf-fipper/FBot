@@ -11,23 +11,23 @@ public record GetGroupInfoVo
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public long GroupId { get; init; }
+    public long GroupId { get; set; }
 
     /// <summary>
     /// 群名称
     /// </summary>
     [JsonPropertyName("group_name")]
-    public string GroupName { get; init; } = string.Empty;
+    public string GroupName { get; set; } = string.Empty;
 
     /// <summary>
     /// 成员数
     /// </summary>
     [JsonPropertyName("member_count")]
-    public int MemberCount { get; init; }
+    public int MemberCount { get; set; }
 
     /// <summary>
     /// 最大成员数（群容量）
     /// </summary>
     [JsonPropertyName("max_member_count")]
-    public int MaxMemberCount { get; init; }
+    public int MaxMemberCount { get; set; }
 }

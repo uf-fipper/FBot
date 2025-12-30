@@ -12,25 +12,25 @@ public record SendMsgDto
     /// 消息类型，支持 private、group，分别对应私聊、群组
     /// </summary>
     [JsonPropertyName("message_type")]
-    public required SendMsgDtoMessageType MessageType { get; init; }
+    public required SendMsgDtoMessageType MessageType { get; set; }
 
     /// <summary>
     /// 对方 QQ 号（消息类型为 private 时需要）
     /// </summary>
     [JsonPropertyName("user_id")]
-    public long? UserId { get; init; }
+    public long? UserId { get; set; }
 
     /// <summary>
     /// 群号（消息类型为 group 时需要）
     /// </summary>
     [JsonPropertyName("group_id")]
-    public long? GroupId { get; init; }
+    public long? GroupId { get; set; }
 
     /// <summary>
     /// 要发送的内容
     /// </summary>
     [JsonPropertyName("message")]
-    public required Message Message { get; init; }
+    public required Message Message { get; set; }
 }
 
 /// <summary>

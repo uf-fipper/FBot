@@ -11,5 +11,5 @@ public record GetMsgDto
     /// 消息 ID
     /// </summary>
     [JsonPropertyName("message_id")]
-    public required int MessageId { get; init; }
+    public required int MessageId { get; set; }
 }

@@ -11,17 +11,17 @@ public record SetFriendAddRequestDto
     /// 加好友请求的 flag（需从上报的数据中获得）
     /// </summary>
     [JsonPropertyName("flag")]
-    public required string Flag { get; init; }
+    public required string Flag { get; set; }
 
     /// <summary>
     /// 是否同意请求，默认 true
     /// </summary>
     [JsonPropertyName("approve")]
-    public bool Approve { get; init; } = true;
+    public bool Approve { get; set; } = true;
 
     /// <summary>
     /// 添加后的好友备注（仅在同意时有效）
     /// </summary>
     [JsonPropertyName("remark")]
-    public string? Remark { get; init; }
+    public string? Remark { get; set; }
 }

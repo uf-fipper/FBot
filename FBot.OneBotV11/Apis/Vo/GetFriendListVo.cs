@@ -11,17 +11,17 @@ public record GetFriendListVo
     /// QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public long UserId { get; init; }
+    public long UserId { get; set; }
 
     /// <summary>
     /// 昵称
     /// </summary>
     [JsonPropertyName("nickname")]
-    public string Nickname { get; init; } = string.Empty;
+    public string Nickname { get; set; } = string.Empty;
 
     /// <summary>
     /// 备注名
     /// </summary>
     [JsonPropertyName("remark")]
-    public string? Remark { get; init; }
+    public string? Remark { get; set; }
 }

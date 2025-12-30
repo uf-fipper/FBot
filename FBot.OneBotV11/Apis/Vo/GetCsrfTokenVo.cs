@@ -11,5 +11,5 @@ public record GetCsrfTokenVo
     /// CSRF Token
     /// </summary>
     [JsonPropertyName("token")]
-    public int Token { get; init; }
+    public int Token { get; set; }
 }

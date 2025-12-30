@@ -11,23 +11,23 @@ public record SetGroupSpecialTitleDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// 要设置的 QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public required long UserId { get; init; }
+    public required long UserId { get; set; }
 
     /// <summary>
     /// 专属头衔，不填或空字符串表示删除专属头衔
     /// </summary>
     [JsonPropertyName("special_title")]
-    public string? SpecialTitle { get; init; }
+    public string? SpecialTitle { get; set; }
 
     /// <summary>
     /// 专属头衔有效期，单位秒，-1 表示永久，默认 -1
     /// </summary>
     [JsonPropertyName("duration")]
-    public int Duration { get; init; } = -1;
+    public int Duration { get; set; } = -1;
 }

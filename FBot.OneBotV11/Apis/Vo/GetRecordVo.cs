@@ -11,5 +11,5 @@ public record GetRecordVo
     /// 转换后的语音文件路径，如 /home/somebody/cqhttp/data/record/0B38145AA44505000B38145AA4450500.mp3
     /// </summary>
     [JsonPropertyName("file")]
-    public string File { get; init; } = string.Empty;
+    public string File { get; set; } = string.Empty;
 }

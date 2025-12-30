@@ -12,5 +12,5 @@ public record GetForwardMsgVo
     /// 消息内容，使用消息的数组格式表示，数组中的消息段全部为 node 消息段
     /// </summary>
     [JsonPropertyName("message")]
-    public Message? Message { get; init; }
+    public Message? Message { get; set; }
 }

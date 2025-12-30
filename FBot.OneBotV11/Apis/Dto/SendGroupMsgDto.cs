@@ -12,11 +12,11 @@ public record SendGroupMsgDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// 要发送的内容
     /// </summary>
     [JsonPropertyName("message")]
-    public required Message Message { get; init; }
+    public required Message Message { get; set; }
 }

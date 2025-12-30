@@ -11,11 +11,11 @@ public record SendLikeDto
     /// 对方 QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public required long UserId { get; init; }
+    public required long UserId { get; set; }
 
     /// <summary>
     /// 赞的次数，每个好友每天最多 10 次
     /// </summary>
     [JsonPropertyName("times")]
-    public int Times { get; init; } = 1;
+    public int Times { get; set; } = 1;
 }

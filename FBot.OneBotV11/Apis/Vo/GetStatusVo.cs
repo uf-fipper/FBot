@@ -11,11 +11,11 @@ public record GetStatusVo
     /// 当前 QQ 在线，null 表示无法查询到在线状态
     /// </summary>
     [JsonPropertyName("online")]
-    public bool? Online { get; init; }
+    public bool? Online { get; set; }
 
     /// <summary>
     /// 状态符合预期，意味着各模块正常运行、功能正常，且 QQ 在线
     /// </summary>
     [JsonPropertyName("good")]
-    public bool Good { get; init; }
+    public bool Good { get; set; }
 }

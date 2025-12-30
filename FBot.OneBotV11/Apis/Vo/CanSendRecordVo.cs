@@ -11,5 +11,5 @@ public record CanSendRecordVo
     /// 是或否
     /// </summary>
     [JsonPropertyName("yes")]
-    public bool Yes { get; init; }
+    public bool Yes { get; set; }
 }

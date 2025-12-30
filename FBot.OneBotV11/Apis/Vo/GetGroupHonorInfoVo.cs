@@ -11,43 +11,43 @@ public record GetGroupHonorInfoVo
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public long GroupId { get; init; }
+    public long GroupId { get; set; }
 
     /// <summary>
     /// 当前龙王（仅 type 为 talkative 或 all 时有数据）
     /// </summary>
     [JsonPropertyName("current_talkative")]
-    public HonorMemberInfo? CurrentTalkative { get; init; }
+    public HonorMemberInfo? CurrentTalkative { get; set; }
 
     /// <summary>
     /// 历史龙王（仅 type 为 talkative 或 all 时有数据）
     /// </summary>
     [JsonPropertyName("talkative_list")]
-    public List<HonorMemberInfo>? TalkativeList { get; init; }
+    public List<HonorMemberInfo>? TalkativeList { get; set; }
 
     /// <summary>
     /// 群聊之火（仅 type 为 performer 或 all 时有数据）
     /// </summary>
     [JsonPropertyName("performer_list")]
-    public List<HonorMemberInfo>? PerformerList { get; init; }
+    public List<HonorMemberInfo>? PerformerList { get; set; }
 
     /// <summary>
     /// 群聊炽焰（仅 type 为 legend 或 all 时有数据）
     /// </summary>
     [JsonPropertyName("legend_list")]
-    public List<HonorMemberInfo>? LegendList { get; init; }
+    public List<HonorMemberInfo>? LegendList { get; set; }
 
     /// <summary>
     /// 冒尖小春笋（仅 type 为 strong_newbie 或 all 时有数据）
     /// </summary>
     [JsonPropertyName("strong_newbie_list")]
-    public List<HonorMemberInfo>? StrongNewbieList { get; init; }
+    public List<HonorMemberInfo>? StrongNewbieList { get; set; }
 
     /// <summary>
     /// 快乐之源（仅 type 为 emotion 或 all 时有数据）
     /// </summary>
     [JsonPropertyName("emotion_list")]
-    public List<HonorMemberInfo>? EmotionList { get; init; }
+    public List<HonorMemberInfo>? EmotionList { get; set; }
 }
 
 /// <summary>
@@ -59,29 +59,29 @@ public record HonorMemberInfo
     /// QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public long UserId { get; init; }
+    public long UserId { get; set; }
 
     /// <summary>
     /// 昵称
     /// </summary>
     [JsonPropertyName("nickname")]
-    public string Nickname { get; init; } = string.Empty;
+    public string Nickname { get; set; } = string.Empty;
 
     /// <summary>
     /// 头像 URL
     /// </summary>
     [JsonPropertyName("avatar")]
-    public string? Avatar { get; init; }
+    public string? Avatar { get; set; }
 
     /// <summary>
     /// 持续天数（仅当前龙王）
     /// </summary>
     [JsonPropertyName("day_count")]
-    public int DayCount { get; init; }
+    public int DayCount { get; set; }
 
     /// <summary>
     /// 荣誉描述（历史荣誉列表）
     /// </summary>
     [JsonPropertyName("description")]
-    public string? Description { get; init; }
+    public string? Description { get; set; }
 }

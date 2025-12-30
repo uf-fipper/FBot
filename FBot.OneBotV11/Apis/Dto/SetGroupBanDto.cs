@@ -11,17 +11,17 @@ public record SetGroupBanDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// 要禁言的 QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public required long UserId { get; init; }
+    public required long UserId { get; set; }
 
     /// <summary>
     /// 禁言时长，单位秒，0 表示取消禁言，默认 30 分钟
     /// </summary>
     [JsonPropertyName("duration")]
-    public int Duration { get; init; } = 30 * 60;
+    public int Duration { get; set; } = 30 * 60;
 }

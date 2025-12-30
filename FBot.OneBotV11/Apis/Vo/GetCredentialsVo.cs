@@ -11,11 +11,11 @@ public record GetCredentialsVo
     /// Cookies
     /// </summary>
     [JsonPropertyName("cookies")]
-    public string Cookies { get; init; } = string.Empty;
+    public string Cookies { get; set; } = string.Empty;
 
     /// <summary>
     /// CSRF Token
     /// </summary>
     [JsonPropertyName("csrf_token")]
-    public int CsrfToken { get; init; }
+    public int CsrfToken { get; set; }
 }

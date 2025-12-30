@@ -11,17 +11,17 @@ public record GetVersionInfoVo
     /// 应用标识，如 mirai-native
     /// </summary>
     [JsonPropertyName("app_name")]
-    public string AppName { get; init; } = string.Empty;
+    public string AppName { get; set; } = string.Empty;
 
     /// <summary>
     /// 应用版本，如 1.2.3
     /// </summary>
     [JsonPropertyName("app_version")]
-    public string AppVersion { get; init; } = string.Empty;
+    public string AppVersion { get; set; } = string.Empty;
 
     /// <summary>
     /// OneBot 标准版本，如 v11
     /// </summary>
     [JsonPropertyName("protocol_version")]
-    public string ProtocolVersion { get; init; } = string.Empty;
+    public string ProtocolVersion { get; set; } = string.Empty;
 }

@@ -11,5 +11,5 @@ public record GetCredentialsDto
     /// 需要获取 cookies 的域名
     /// </summary>
     [JsonPropertyName("domain")]
-    public string? Domain { get; init; }
+    public string? Domain { get; set; }
 }

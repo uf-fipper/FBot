@@ -11,5 +11,5 @@ public record SendGroupMsgVo
     /// 消息 ID
     /// </summary>
     [JsonPropertyName("message_id")]
-    public long MessageId { get; init; }
+    public long MessageId { get; set; }
 }

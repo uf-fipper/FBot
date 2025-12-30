@@ -11,17 +11,17 @@ public record GetGroupMemberInfoDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public required long UserId { get; init; }
+    public required long UserId { get; set; }
 
     /// <summary>
     /// 是否不使用缓存（使用缓存可能更新不及时，但响应更快），默认 false
     /// </summary>
     [JsonPropertyName("no_cache")]
-    public bool NoCache { get; init; } = false;
+    public bool NoCache { get; set; } = false;
 }

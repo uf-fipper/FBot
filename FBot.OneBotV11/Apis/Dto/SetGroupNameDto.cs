@@ -11,11 +11,11 @@ public record SetGroupNameDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// 新群名
     /// </summary>
     [JsonPropertyName("group_name")]
-    public required string GroupName { get; init; }
+    public required string GroupName { get; set; }
 }

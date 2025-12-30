@@ -11,11 +11,11 @@ public record GetGroupHonorInfoDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// 要获取的群荣誉类型，可传入 talkative、performer、legend、strong_newbie、emotion 以分别获取单个类型的群荣誉数据，或传入 all 获取所有数据
     /// </summary>
     [JsonPropertyName("type")]
-    public required string Type { get; init; }
+    public required string Type { get; set; }
 }

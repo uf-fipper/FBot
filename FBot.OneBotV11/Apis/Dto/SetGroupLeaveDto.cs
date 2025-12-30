@@ -11,11 +11,11 @@ public record SetGroupLeaveDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// 是否解散，如果登录号是群主，则仅在此项为 true 时能够解散，默认 false
     /// </summary>
     [JsonPropertyName("is_dismiss")]
-    public bool IsDismiss { get; init; } = false;
+    public bool IsDismiss { get; set; } = false;
 }

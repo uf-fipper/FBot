@@ -11,5 +11,5 @@ public record GetForwardMsgDto
     /// 合并转发 ID
     /// </summary>
     [JsonPropertyName("id")]
-    public required string Id { get; init; }
+    public required string Id { get; set; }
 }

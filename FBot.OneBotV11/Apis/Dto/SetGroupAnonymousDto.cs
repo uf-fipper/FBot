@@ -11,11 +11,11 @@ public record SetGroupAnonymousDto
     /// 群号
     /// </summary>
     [JsonPropertyName("group_id")]
-    public required long GroupId { get; init; }
+    public required long GroupId { get; set; }
 
     /// <summary>
     /// 是否允许匿名聊天，默认 true
     /// </summary>
     [JsonPropertyName("enable")]
-    public bool Enable { get; init; } = true;
+    public bool Enable { get; set; } = true;
 }

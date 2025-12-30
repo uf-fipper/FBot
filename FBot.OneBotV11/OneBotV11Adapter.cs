@@ -38,12 +38,12 @@ public class OneBotV11Adapter
 
     protected virtual IOneBotV11Bot CreateBot(long id, HttpServerConfig serverConfig)
     {
-        return new OneBotV11Bot(this, id, serverConfig);
+        return new OneBotV11HttpBot(this, id, serverConfig);
     }
 
     protected virtual IOneBotV11Bot CreateBot(long id, WebSocket webSocket)
     {
-        return new OneBotV11Bot(this, id, webSocket);
+        return new OneBotV11WebSocketBot(this, id, webSocket);
     }
 
     public void Init(IEndpointRouteBuilder app, CancellationToken cancellationToken)

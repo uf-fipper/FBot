@@ -11,23 +11,23 @@ public record GetStrangerInfoVo
     /// QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public long UserId { get; init; }
+    public long UserId { get; set; }
 
     /// <summary>
     /// 昵称
     /// </summary>
     [JsonPropertyName("nickname")]
-    public string Nickname { get; init; } = string.Empty;
+    public string Nickname { get; set; } = string.Empty;
 
     /// <summary>
     /// 性别，male 或 female 或 unknown
     /// </summary>
     [JsonPropertyName("sex")]
-    public string Sex { get; init; } = string.Empty;
+    public string Sex { get; set; } = string.Empty;
 
     /// <summary>
     /// 年龄
     /// </summary>
     [JsonPropertyName("age")]
-    public int Age { get; init; }
+    public int Age { get; set; }
 }

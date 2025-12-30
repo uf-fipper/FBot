@@ -11,11 +11,11 @@ public record GetLoginInfoVo
     /// QQ 号
     /// </summary>
     [JsonPropertyName("user_id")]
-    public long UserId { get; init; }
+    public long UserId { get; set; }
 
     /// <summary>
     /// QQ 昵称
     /// </summary>
     [JsonPropertyName("nickname")]
-    public string Nickname { get; init; } = string.Empty;
+    public string Nickname { get; set; } = string.Empty;
 }
