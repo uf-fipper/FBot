@@ -1,5 +1,5 @@
-using DependentInvoker;
 using FBot;
+using FBot.Invoker;
 using FBot.OneBotV11.Events.Messages;
 using FBot.OneBotV11.Events.Messages.Segments;
 

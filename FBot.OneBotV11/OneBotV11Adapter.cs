@@ -99,6 +99,16 @@ public class OneBotV11Adapter
                 }
 
                 await webSocket.ConnectAsync(new Uri(config.Url), cancellationToken);
+                try
+                {
+                    var lifecycleEvent = await webSocket.ReceiveAsJsonAsync<LifecycleEvent>();
+                }
+                catch (JsonException)
+                {
+                    // 身份校验失败
+                    Logger?.LogError("WebSocket 身份校验失败");
+                    continue;
+                }
                 while (!cancellationToken.IsCancellationRequested)
                 {
                     await HandleWebSocketResultAsync(webSocket, cancellationToken);
@@ -174,7 +184,7 @@ public class OneBotV11Adapter
             return;
         }
         var bot = CreateBot(@event.SelfId, webSocket);
-        await Driver.RunEventMethodsAsync(bot, @event, cancellationToken);
+        Driver.RunEventMethodsBackground(bot, @event, cancellationToken);
     }
 
     private void InitWebHook(
@@ -196,7 +206,7 @@ public class OneBotV11Adapter
                 var jsonElement = await request.ReadFromJsonAsync<JsonElement>(cancellationToken);
                 var @event = GetEvent(jsonElement);
                 var bot = CreateBot(@event.SelfId, config.HttpServerConfig);
-                await Driver.RunEventMethodsAsync(bot, @event, cancellationToken);
+                Driver.RunEventMethodsBackground(bot, @event, cancellationToken);
             }
         );
     }

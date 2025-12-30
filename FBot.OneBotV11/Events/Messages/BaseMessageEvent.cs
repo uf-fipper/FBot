@@ -27,13 +27,13 @@ public class BaseMessageEvent : OneBotV11Event
     /// 消息类型（private/group）。
     /// </summary>
     [JsonPropertyName("message_type")]
-    public MessageTypeEnum MessageType { get; set; }
+    public string MessageType { get; set; } = null!;
 
     /// <summary>
     /// 消息子类型（例如 friend/group/other）。
     /// </summary>
     [JsonPropertyName("sub_type")]
-    public MessageSubTypeEnum SubType { get; set; }
+    public string SubType { get; set; } = null!;
 
     /// <summary>
     /// 消息 ID。
@@ -66,27 +66,4 @@ public class BaseMessageEvent : OneBotV11Event
     public int Font { get; set; }
 
     public Message GetMessage() => Message;
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum MessageTypeEnum
-{
-    [JsonStringEnumMemberName("private")]
-    Private,
-
-    [JsonStringEnumMemberName("group")]
-    Group,
-}
-
-[JsonConverter(typeof(JsonStringEnumConverter))]
-public enum MessageSubTypeEnum
-{
-    [JsonStringEnumMemberName("friend")]
-    Friend,
-
-    [JsonStringEnumMemberName("group")]
-    Group,
-
-    [JsonStringEnumMemberName("other")]
-    Other,
 }
