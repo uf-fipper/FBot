@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 namespace FBot.NapCat.Apis.Dto;
 
 /// <summary>
-/// 设置账号信息
+/// 设置账号信息请求
 /// </summary>
 public record SetQQProfileDto
 {

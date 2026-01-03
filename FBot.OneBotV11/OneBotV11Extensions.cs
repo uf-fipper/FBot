@@ -6,7 +6,7 @@ namespace FBot.OneBotV11;
 
 public static partial class OneBotV11Extensions
 {
-    public static IServiceCollection AddOneBotV11(
+    public static IFDriverBuilder AddOneBotV11(
         this IServiceCollection services,
         OneBotV11Config oneBotV11Config
     )
@@ -20,7 +20,7 @@ public static partial class OneBotV11Extensions
         );
     }
 
-    public static IServiceCollection AddOneBotV11(
+    public static IFDriverBuilder AddOneBotV11(
         this IServiceCollection services,
         Action<OneBotV11Config> configureOptions
     )
@@ -29,7 +29,7 @@ public static partial class OneBotV11Extensions
         return services.AddOneBotV11Internal();
     }
 
-    public static IServiceCollection AddOneBotV11(
+    public static IFDriverBuilder AddOneBotV11(
         this IServiceCollection services,
         IConfigurationSection section
     )
@@ -38,13 +38,13 @@ public static partial class OneBotV11Extensions
         return services.AddOneBotV11Internal();
     }
 
-    private static IServiceCollection AddOneBotV11Internal(this IServiceCollection services)
+    private static IFDriverBuilder AddOneBotV11Internal(this IServiceCollection services)
     {
         var fBotBuilder = services.AddFBot();
         fBotBuilder.InvokerBuilder.AddDependentConverter<Message, MessageDependent>();
         services.AddSingleton<OneBotV11Adapter>();
         services.AddScoped<MessageDependent>();
-        return services;
+        return fBotBuilder;
     }
 
     public static IEndpointRouteBuilder UseOneBotV11(

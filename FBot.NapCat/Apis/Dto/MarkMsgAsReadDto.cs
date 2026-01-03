@@ -1,21 +1,21 @@
-using System.Text.Json.Serialization;
 using FBot.NapCat.Apis.Shared;
+using System.Text.Json.Serialization;
 
 namespace FBot.NapCat.Apis.Dto;
 
 /// <summary>
-/// 获取推荐好友/群聊卡片请求
+/// 标记消息为已读请求
 /// </summary>
-public record SendArkShareDto
+public record MarkMsgAsReadDto
 {
     /// <summary>
-    /// 群聊ID，与 user_id 二选一
+    /// 群ID
     /// </summary>
     [JsonPropertyName("group_id")]
     public StringOrInteger? GroupId { get; set; }
 
     /// <summary>
-    /// 用户ID，与 group_id 二选一
+    /// 用户ID
     /// </summary>
     [JsonPropertyName("user_id")]
     public StringOrInteger? UserId { get; set; }
