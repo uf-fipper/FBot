@@ -11,7 +11,7 @@ public enum DependentParameterInfoFrom
 
 public class DependentParameterInfo
 {
-    public DependentParameterInfo(Type dependentType, object?[] args)
+    public DependentParameterInfo(Type dependentType, object?[] args, bool? useCache = null)
     {
         if (!typeof(IDependent).IsAssignableFrom(dependentType))
         {
@@ -19,11 +19,14 @@ public class DependentParameterInfo
         }
         DependentType = dependentType;
         Args = args;
+        UseCache = useCache;
     }
 
     public Type DependentType { get; }
 
     public object?[] Args { get; }
+
+    public bool? UseCache { get; }
 }
 
 public class DependentMethodParameterInfo
@@ -54,7 +57,13 @@ public class DependentMethodParameterInfo
             switch (attribute)
             {
                 case FromDependentAttribute attr:
-                    DependentTypes.Add(new DependentParameterInfo(attr.DependentType, attr.Args));
+                    DependentTypes.Add(
+                        new DependentParameterInfo(
+                            attr.DependentType,
+                            attr.Args,
+                            attr.UseCacheOptional
+                        )
+                    );
                     break;
                 case FromKeyedServicesAttribute attr:
                     DependentTypes.Add(

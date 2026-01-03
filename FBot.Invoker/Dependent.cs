@@ -13,6 +13,8 @@ public class DependentInvokeInfo(ParameterInfo parameterInfo, object?[] args)
 public interface IDependent
 {
     IDependentResult Invoke(IDependentContext context, DependentInvokeInfo? info);
+
+    bool UseCache => true;
 }
 
 public interface IDependentAny : IDependent

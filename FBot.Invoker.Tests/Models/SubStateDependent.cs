@@ -4,6 +4,8 @@ public class SubStateDependent : IDependentAny
 {
     public Delegate Dependency => Invoke;
 
+    public bool UseCache => false;
+
     private DependentResult Invoke(
         SubDependentContext subDependentContext,
         DependentInvokeInfo info

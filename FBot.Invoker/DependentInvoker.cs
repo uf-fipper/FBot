@@ -135,12 +135,9 @@ public class DependentInvoker(DependentInvokerOptions options, IServiceProvider 
         {
             return DependentResult.Valid(info);
         }
-        foreach (var dependentType in parameterInfo.DependentTypes)
+        foreach (var dependentParameterInfo in parameterInfo.DependentTypes)
         {
-            var method = dependentType
-                .DependentType.GetInterfaceMap(typeof(IDependent))
-                .TargetMethods.First();
-            var obj = serviceProvider.GetService(dependentType.DependentType);
+            var obj = (IDependent?)serviceProvider.GetService(dependentParameterInfo.DependentType);
             if (obj is null)
             {
                 if (Options.ThrowIfNoService)
@@ -149,10 +146,35 @@ public class DependentInvoker(DependentInvokerOptions options, IServiceProvider 
                 }
                 return DependentResult.Invalid();
             }
-            var subInfo = new DependentInvokeInfo(parameterInfo.ParameterInfo, dependentType.Args);
-            var result =
-                (IDependentResult?)method.Invoke(obj, [context, subInfo])
-                ?? DependentResult.Invalid();
+            var useCache = dependentParameterInfo.UseCache ?? obj.UseCache;
+            if (useCache)
+            {
+                // 从缓存中获取
+                if (
+                    context.CachedDependents.TryGetValue(
+                        dependentParameterInfo.DependentType,
+                        out var cachedValue
+                    )
+                )
+                {
+                    var cachedResult = ConvertResult(cachedValue, parameterInfo);
+                    if (cachedResult.IsValid)
+                    {
+                        return cachedResult;
+                    }
+                    return DependentResult.Invalid();
+                }
+            }
+            var subInfo = new DependentInvokeInfo(
+                parameterInfo.ParameterInfo,
+                dependentParameterInfo.Args
+            );
+            var result = obj.Invoke(context, subInfo);
+            if (useCache)
+            {
+                // 存入缓存
+                context.CachedDependents[dependentParameterInfo.DependentType] = result.Value;
+            }
             result = ConvertResult(result, parameterInfo);
             if (result.IsValid)
             {

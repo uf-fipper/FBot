@@ -21,5 +21,11 @@ public class FromDependentAttribute : Attribute
 
     public object?[] Args { get; }
 
-    public bool UseCache { get; set; } = true;
+    public bool? UseCacheOptional { get; private set; }
+
+    public bool UseCache
+    {
+        get => UseCacheOptional ?? throw new InvalidOperationException();
+        set => UseCacheOptional = value;
+    }
 }

@@ -2,9 +2,7 @@ namespace FBot.Invoker;
 
 public interface IDependentContext
 {
-    Dictionary<Type, object> CachedDependents { get; }
-
-    Dictionary<Type, object?> CachedDependentsValue { get; }
+    Dictionary<Type, object?> CachedDependents { get; }
 
     IServiceProvider ServiceProvider { get; }
 
@@ -13,9 +11,7 @@ public interface IDependentContext
 
 public class DependentContext : IDependentContext
 {
-    public Dictionary<Type, object> CachedDependents { get; } = [];
-
-    public Dictionary<Type, object?> CachedDependentsValue { get; } = [];
+    public Dictionary<Type, object?> CachedDependents { get; } = [];
 
     public required IServiceProvider ServiceProvider { get; init; }
 
