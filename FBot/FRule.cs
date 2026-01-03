@@ -39,6 +39,8 @@ public class FRule : IFRuleAny
     public FRule(Delegate del)
         : this(new DependentMethod(del)) { }
 
+    public static FRule EmptyRule { get; } = new FRule(() => true);
+
     public DependentMethod Dependency { get; }
 
     public static FAndRule And(params IFRule[] rules)

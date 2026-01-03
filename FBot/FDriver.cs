@@ -8,7 +8,7 @@ namespace FBot;
 
 public class FDriver
 {
-    public List<DependentMethod> EventCallbackMethods { get; } = [];
+    public List<FDependentMethod> EventCallbackMethods { get; } = [];
 
     public IServiceProvider ServiceProvider { get; }
 
@@ -58,7 +58,7 @@ public class FDriver
         IBot bot,
         IEvent @event,
         FResponse response,
-        DependentMethod dependentMethod,
+        FDependentMethod dependentMethod,
         CancellationToken cancellationToken = default
     )
     {
@@ -70,6 +70,10 @@ public class FDriver
             {
                 ServiceProvider = scope.ServiceProvider,
             };
+            if (!await dependentMethod.Rule.IsMatchAsync(context))
+            {
+                return;
+            }
             if (dependentMethod.IsAsync)
             {
                 await invoker.InvokeAsync(dependentMethod, context, null);
@@ -120,7 +124,7 @@ public static class FDriverExtensions
 
     public static FDriver MapEventCallbackMethods(
         this FDriver driver,
-        DependentMethod dependentMethod
+        FDependentMethod dependentMethod
     )
     {
         driver.EventCallbackMethods.Add(dependentMethod);
@@ -129,7 +133,12 @@ public static class FDriverExtensions
 
     public static FDriver MapEventCallbackMethods(this FDriver driver, Delegate del)
     {
-        var dependentMethod = new DependentMethod(del);
+        return MapEventCallbackMethods(driver, del, FRule.EmptyRule);
+    }
+
+    public static FDriver MapEventCallbackMethods(this FDriver driver, Delegate del, IFRule rule)
+    {
+        var dependentMethod = new FDependentMethod(del.Method, (_, _) => del.Target, rule);
         driver.EventCallbackMethods.Add(dependentMethod);
         return driver;
     }

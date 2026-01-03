@@ -11,7 +11,7 @@ public class UnitTest1
         ValidateOnBuild = true,
     };
 
-    private List<int> IsRun { get; } = [];
+    private List<object> IsRun { get; } = [];
 
     private void Run1(IBot bot, IEvent ev)
     {
@@ -73,5 +73,273 @@ public class UnitTest1
         var response = await driver.RunEventMethodsAsync(bot, ev);
         Assert.True(response.HasResponse);
         Assert.Equal(3, response.Value);
+    }
+
+    [Fact]
+    public async Task TestRule1Async()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        driver.MapEventCallbackMethods(
+            Run1,
+            new FRule(() =>
+            {
+                IsRun.Add("rule");
+                return true;
+            })
+        );
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule", IsRun);
+        Assert.Contains(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestRule2Async()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        driver.MapEventCallbackMethods(
+            Run1,
+            new FRule(() =>
+            {
+                IsRun.Add("rule");
+                return false;
+            })
+        );
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule", IsRun);
+        Assert.DoesNotContain(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestAndRule_AllTrueAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FAndRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return true;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return true;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.Contains("rule2", IsRun);
+        Assert.Contains(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestAndRule_TrueFalseAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FAndRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return true;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return false;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.Contains("rule2", IsRun);
+        Assert.DoesNotContain(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestAndRule_FalseTrueAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FAndRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return false;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return true;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.DoesNotContain("rule2", IsRun);
+        Assert.DoesNotContain(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestAndRule_AllFalseAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FAndRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return false;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return false;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.DoesNotContain("rule2", IsRun);
+        Assert.DoesNotContain(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestOrRule_AllTrueAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FOrRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return true;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return true;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.DoesNotContain("rule2", IsRun);
+        Assert.Contains(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestOrRule_TrueFalseAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FOrRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return true;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return false;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.DoesNotContain("rule2", IsRun);
+        Assert.Contains(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestOrRule_FalseTrueAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FOrRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return false;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return true;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.Contains("rule2", IsRun);
+        Assert.Contains(1, IsRun);
+    }
+
+    [Fact]
+    public async Task TestOrRule_AllFalseAsync()
+    {
+        var serviceCollection = new ServiceCollection();
+        var builder = serviceCollection.AddFBot();
+        var serviceProvider = serviceCollection.BuildServiceProvider(_serviceProviderOptions);
+        var driver = serviceProvider.GetRequiredService<FDriver>();
+        var rule = new FOrRule(
+            new FRule(() =>
+            {
+                IsRun.Add("rule1");
+                return false;
+            }),
+            new FRule(() =>
+            {
+                IsRun.Add("rule2");
+                return false;
+            })
+        );
+        driver.MapEventCallbackMethods(Run1, rule);
+        var bot = new FTest1Bot() { BotValue = 1 };
+        var ev = new FTest1Event() { EventValue = 2 };
+        await driver.RunEventMethodsAsync(bot, ev);
+        Assert.Contains("rule1", IsRun);
+        Assert.Contains("rule2", IsRun);
+        Assert.DoesNotContain(1, IsRun);
     }
 }
